@@ -561,3 +561,194 @@ a, button, input, textarea {
   position: relative;
   z-index: 10;
 }
+
+/* ==========================================================================
+   📱 모바일 & 태블릿을 위한 완벽 반응형 디자인 시스템 (추가분)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* 1. 모바일에서는 상단 인증 바가 복잡하므로 세로형 또는 유연하게 흐르도록 높이 해제 */
+  .top-auth-bar {
+    height: auto;
+    padding: 10px 0;
+    position: relative; /* 모바일에서는 본문을 가리지 않게 스크롤되도록 설정 */
+    
+    .horizontal-form {
+      flex-direction: column; /* 인풋창들을 세로로 예쁘게 정렬 */
+      gap: 8px;
+      width: 90%;
+    }
+    
+    .bar-input {
+      width: 100%; /* 모바일 화면 너비에 맞게 꽉 채우기 */
+      height: 32px;
+    }
+    
+    .bar-submit-btn {
+      width: 100%;
+      height: 32px;
+    }
+  }
+
+  /* 2. 상단 바가 상시 고정에서 풀렸으므로 여백을 부드럽게 조절 */
+  .dashboard-wrapper {
+    margin: 30px auto 20px auto;
+    padding: 0 12px;
+  }
+
+  /* 3. 게시판 상자의 여백을 줄여 모바일 화면을 넓게 쓰기 */
+  .board-container {
+    padding: 20px 15px;
+    
+    h2 {
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+  }
+
+  /* 4. 모바일에서 테이블 글씨가 너무 크면 깨지므로 폰트 사이즈 조절 */
+  .modern-table {
+    font-size: 14px;
+    
+    th, td {
+      padding: 10px 8px; /* 좁은 화면에 맞게 패딩 축소 */
+    }
+    
+    button {
+      padding: 2px 6px;
+      font-size: 12px;
+    }
+  }
+
+  /* 5. 글쓰기 폼의 내부 여백 및 폰트 조절 */
+  .modern-form {
+    padding: 16px;
+    
+    input, textarea {
+      padding: 10px 12px;
+      font-size: 13px;
+    }
+    
+    button {
+      width: 100%; /* 모바일에서는 등록 버튼도 큼직하게 100% */
+      align-self: center;
+    }
+  }
+
+  /* 6. 상세 페이지 글자 크기 및 배치 최적화 */
+  .detail-container {
+    padding: 20px 15px;
+    margin: 20px auto;
+
+    .info-header {
+      flex-direction: column; /* 작성자, 글번호를 세로로 배치 */
+      gap: 6px;
+    }
+
+    .content-box {
+      font-size: 16px; /* 모바일 독서에 편한 폰트 크기 */
+      padding: 16px;
+      min-height: 120px;
+    }
+    
+    .btn-group {
+      flex-direction: column; /* 버튼들도 세로로 정렬 */
+      button, .back-btn {
+        width: 100%;
+      }
+    }
+  }
+  
+  /* 7. 카운터 컨테이너도 모바일에서는 세로 배치 */
+  .counter-container {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    justify-content: center;
+    text-align: center;
+    
+    & > div:first-of-type {
+      justify-content: center;
+    }
+    & > div:last-of-type {
+      justify-content: center;
+    }
+  }
+}
+
+/* ==========================================================================
+   🎵 실시간 음악 재생 이퀄라이저 애니메이션 시스템
+   ========================================================================== */
+.now-playing-badge {
+  position: fixed;
+  top: 55px; 
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.25); // 반투명 유리 느낌
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  z-index: 999;
+  box-shadow: 0 4px 15px rgba(255, 183, 197, 0.15);
+
+  // 텍스트 스타일
+  .track-info {
+    font-size: 11px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 1.5px;
+    text-shadow: 0 1px 4px rgba(74, 62, 65, 0.2);
+    animation: pulseText 1.5s infinite alternate;
+  }
+
+  // 이퀄라이저 막대기들의 기둥 상자
+  .equalizer {
+    display: flex;
+    align-items: flex-end; // 밑바닥을 기준으로 기둥이 솟아오르게 고정
+    gap: 3px;
+    height: 14px;
+
+    .bar {
+      width: 3px;
+      height: 100%;
+      background-color: #ffffff;
+      border-radius: 1px;
+      transform-origin: bottom; // 아래쪽을 축으로 움직이게 설정
+      animation: audioWave 1s ease-in-out infinite alternate;
+
+      // 5개 기둥의 움직임 타이밍과 속도를 엇갈리게 만들어서 랜덤 주파수 효과 연출!
+      &:nth-child(1) { animation-duration: 0.5s; animation-delay: 0.1s; }
+      &:nth-child(2) { animation-duration: 0.8s; animation-delay: 0.3s; }
+      &:nth-child(3) { animation-duration: 0.6s; animation-delay: 0.0s; }
+      &:nth-child(4) { animation-duration: 0.9s; animation-delay: 0.5s; }
+      &:nth-child(5) { animation-duration: 0.4s; animation-delay: 0.2s; }
+    }
+  }
+}
+
+/* 주파수가 위아래로 도약하는 키프레임 */
+@keyframes audioWave {
+  0% { transform: scaleY(0.2); }
+  100% { transform: scaleY(1); }
+}
+
+/* 글자가 은은하게 빛나는 불빛 효과 키프레임 */
+@keyframes pulseText {
+  0% { opacity: 0.75; }
+  100% { opacity: 1; }
+}
+
+/* 📱 모바일 디바이스 반응형 스크린 추가 세팅 */
+@media (max-width: 768px) {
+  .now-playing-badge {
+    position: relative;
+    top: 0;
+    right: 0;
+    margin: 15px auto 5px auto; /* 모바일에서는 상단 중앙에 예쁘게 안착 */
+    width: fit-content;
+    background: rgba(238, 186, 193, 0.5);
+  }
+}
