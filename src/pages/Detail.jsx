@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import usePostStore from '../store/postStore'
+import useAuthStore from '../store/authStore'
 
 const Detail = () => {
     const { id } = useParams()
     const posts = usePostStore((state) => state.posts)
     const updatePost = usePostStore((state) => state.updatePost)
+    
+    // ✨ [추가] 현재 로그인한 유저의 정보를 스토어에서 쏙 꺼내옵니다.
+    const user = useAuthStore((state) => state.user)
 
     // 1. 현재 주소창 ID와 일치하는 게시글 찾기
     const post = posts.find((item) => item.id === id)
+
+    // 목록이랑 번호를 똑같이 맞추기 위해 몇 번째 글인지 인덱스 순서(+1)를 구합니다.
     const postIndex = posts.findIndex((item) => item.id === id) + 1
 
     // 수정모드 상태 관리
@@ -102,7 +108,12 @@ const Detail = () => {
                         </div>
 
                         <div className="btn-group">
-                            <button onClick={() => setIsEdit(true)}>수정하기</button>
+                            {/* 🌸 [핵심 보안 포인트!] 
+                                로그인된 유저가 존재하고(&&), 그 유저의 uid와 게시글을 작성한 uid가 완벽히 일치할 때만!
+                                [수정하기] 버튼이 화면에 뾰로롱 나타납니다. 비로그인이나 타인은 버튼 구경도 못 해요! */}
+                            {user && post.uid === user.uid && (
+                                <button onClick={() => setIsEdit(true)}>수정하기</button>
+                            )}
                             <Link to='/' className="back-btn">목록으로</Link>
                         </div>
                     </div>
