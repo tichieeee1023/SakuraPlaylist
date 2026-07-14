@@ -5,6 +5,10 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
+<<<<<<< HEAD
+import { getStorage } from "firebase/storage";
+=======
+>>>>>>> 7610373b1884168048a687b6f88d8b83a12af7d2
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -30,3 +34,7 @@ export const auth = getAuth(app)
 // Firebase 명령어: getFirestore()
 // Firestore Database 기능을 사용할 수 있게 합니다.
 export const db = getFirestore(app)
+<<<<<<< HEAD
+export const storage = getStorage(app);
+=======
+>>>>>>> 7610373b1884168048a687b6f88d8b83a12af7d2

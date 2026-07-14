@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+<<<<<<< HEAD
+node_modules/
+.env
+dist/
+build/
+=======
+>>>>>>> 7610373b1884168048a687b6f88d8b83a12af7d2
